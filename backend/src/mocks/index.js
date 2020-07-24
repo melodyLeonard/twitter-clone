@@ -5,7 +5,7 @@ import User from '../models/User';
 
 const TWEETS_TOTAL = 5;
 
-const UER_TOTAL = 5
+const UER_TOTAL = 5;
 
 export default async () => {
   try {
@@ -19,20 +19,16 @@ export default async () => {
         email: faker.internet.email(),
         lastName: faker.name.lastName(),
         avatar: `http://omerandomuer.me/api/potrait/boy${i}.jpg`,
-        password: 'password'
-
-      })
-      await Array.from({ length: TWEETS_TOTAL }).forEach(async () => {
-        return await Tweet.create({ text: faker.lorem.sentence(), user: user._id });
+        password: 'password',
       });
-    })
+      await Array.from({ length: TWEETS_TOTAL }).forEach(async () => {
+        return await Tweet.create({
+          text: faker.lorem.sentence(),
+          user: user._id,
+        });
+      });
+    });
   } catch (error) {
     throw error;
   }
 };
-
-
-
-
-
-

@@ -45,16 +45,15 @@ export default {
   updateTweet: async (_, { _id, ...rest }, { user }) => {
     try {
       await requireAuth(user);
-      const tweet = await Tweet.findOne({ _id, user: user._id })
+      const tweet = await Tweet.findOne({ _id, user: user._id });
       if (!tweet) {
-        throw new Error('Not found')
+        throw new Error('Not found');
       }
       Object.entries(rest).forEach(([key, value]) => {
-        tweet[key] = value
-      })
+        tweet[key] = value;
+      });
 
-      return tweet.save()
-
+      return tweet.save();
     } catch (error) {
       throw error;
     }
@@ -63,11 +62,11 @@ export default {
   deleteTweet: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      const tweet = await Tweet.findOne({ _id, user: user._id })
+      const tweet = await Tweet.findOne({ _id, user: user._id });
       if (!tweet) {
-        throw new Error('Not found')
+        throw new Error('Not found');
       }
-      await tweet.remove()
+      await tweet.remove();
       return {
         message: 'Tweet has been deleted',
       };

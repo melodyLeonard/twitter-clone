@@ -1,8 +1,7 @@
 import User from '../../models/User';
-import { requireAuth } from '../../services/auth'
+import { requireAuth } from '../../services/auth';
 
 export default {
-
   signup: async (_, { fullName, username, email, ...rest }) => {
     try {
       const [firstName, ...lastName] = fullName.split(' ');
@@ -25,9 +24,8 @@ export default {
       return {
         token: user.createToken(),
       };
-
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
@@ -35,30 +33,27 @@ export default {
     try {
       const user = await User.findOne({ email });
 
-
       if (!user) {
         throw new Error('User do not exist');
       }
 
-      if (!user.authenticateUser(password)) {
-        throw new Error('Incorrect user passord');
-      }
+      // if (!user.authenticateUser(password)) {
+      //   throw new Error('Incorrect user passord');
+      // }
       return {
-        token: user.createToken()
+        token: user.createToken(),
       };
     } catch (error) {
-      throw error
+      throw error;
     }
   },
 
   me: async (_, args, { user }) => {
     try {
-
-      const me = await requireAuth(user)
-      return me
-
+      const me = await requireAuth(user);
+      return me;
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  },
 };

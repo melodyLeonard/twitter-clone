@@ -1,14 +1,13 @@
-import GraphQLDate from 'graphql-date'
-import User from '../../models/User'
+import GraphQLDate from 'graphql-date';
+import User from '../../models/User';
 import TweetResolvers from './tweet-resolvers';
 import UserResolver from './user-resolver';
-
 
 export default {
   Date: GraphQLDate,
 
   Tweet: {
-    user: ({ user }) => User.findById(user)
+    user: ({ user }) => User.findById(user),
   },
 
   Query: {
@@ -28,6 +27,5 @@ export default {
     //Users
     signup: UserResolver.signup,
     login: UserResolver.login,
-
   },
 };

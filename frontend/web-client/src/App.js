@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.scss';
+import Layout from './components/Layout';
+import Navbar from './components/Navbar';
+
+//Redux
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 function App() {
+  const [sidebar, setSidebar] = useState('sidebar-close')
+
+  const toggleSidebar = () => {
+    sidebar === 'sidebar' ? setSidebar('sidebar-close') : setSidebar('sidebar')
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <div className="app">
+        <Navbar toggleSidebar={toggleSidebar} />
+        <Layout sidebar={sidebar} />
+      </div>
+    </Provider>
+
+  )
 }
 
 export default App;
