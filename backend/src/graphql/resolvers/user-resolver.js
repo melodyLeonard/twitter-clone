@@ -37,9 +37,9 @@ export default {
         throw new Error('User do not exist');
       }
 
-      // if (!user.authenticateUser(password)) {
-      //   throw new Error('Incorrect user passord');
-      // }
+      if (!user.authenticateUser(password)) {
+        throw new Error('Incorrect user passord');
+      }
       return {
         token: user.createToken(),
       };

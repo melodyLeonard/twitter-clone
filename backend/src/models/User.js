@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { hashSync, compareSync } from 'bcrypt-nodejs';
+import bcrypt from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
 import constants from '../config/constants';
@@ -24,19 +24,16 @@ const UserSchema = new Schema(
 
 UserSchema.pre('save', function (next) {
   if (this.isModified('password')) {
-    this.password = this._hassPassword;
+    this.password = bcrypt.hashSync(this.password);
     return next();
   }
   return next();
 });
 
 UserSchema.methods = {
-  _hassPassword(password) {
-    return hashSync(password, 12);
-  },
 
   authenticateUser(password) {
-    return compareSync(password, this.pasword);
+    return bcrypt.compareSync(password, this.password);
   },
 
   createToken() {

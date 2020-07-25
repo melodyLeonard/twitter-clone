@@ -26,6 +26,7 @@ export default `
         firstName: String
         lastName: String
         avatar: String
+        password:String
         email: String!
         createdAt: Date!
         updatedAt: Date!

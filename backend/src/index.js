@@ -26,7 +26,7 @@ server.applyMiddleware({ app });
 const PORT = constants.PORT;
 
 try {
-  // mocksUpData();
+  mocksUpData();
   app.listen({ port: PORT }, () => {
     try {
       console.log(
